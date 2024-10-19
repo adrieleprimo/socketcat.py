@@ -16,5 +16,5 @@ def serverLoop(target, port):
         clientSocket, addr = server.accept()
         print(f'[*] Accepted connection from {addr[0]}:{addr[1]}')
 
-        clientThread = threading.Thread(target=clientHandler, args=(clientThread,))
+        clientThread = threading.Thread(target=clientHandler, args=(clientSocket,))
         clientThread.start()
