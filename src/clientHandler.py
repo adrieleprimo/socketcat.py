@@ -39,5 +39,6 @@ def clientHandler(clientSocket, uploadDestination=None, execute=None, command=Fa
             while b'\n' not in cmdBuffer:
                 cmdBuffer +=clientSocket.recv(1024)
 
-    response = runCommand(cmdBuffer.decode())   
+            response = runCommand(cmdBuffer.decode())   
+            
     clientSocket.send(response.encode())
