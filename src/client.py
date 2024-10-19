@@ -9,13 +9,17 @@ def clientSender(buffer, target, port):
             client.send(buffer.encode)
 
         while True:
+            recvLen = 1
             response = ''
-            recvLen = license(data)
-            response+=data.encode()
 
-            if recvLen <4096:
+            while recvLen:
+                data = client.recv(4096)
+                recvLen = len(data)
+                response+=data.decode()
+
+            if recvLen < 4096:
                 break
-            print(response)
+            print(f'[*] Received response: {response}')
 
             buffer = input('')
             buffer+='\n'
