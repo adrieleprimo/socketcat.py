@@ -3,7 +3,7 @@ import socket
 import getopt
 import threading
 import subprocess
-
+import ssl
 
 listen = False
 command = False
@@ -14,7 +14,7 @@ uploadDestination = ''
 port = 0
 
 def usage():
-    print('Ob Net Tool\n')
+    print('Obtuosa Tool\n')
     print('Usage: socketCat.py -t targetHost -p port\n')
     print('-l --listen                   - listen on [host]:[port] for incoming connections')
     print('-e --execute=fileToRun        - execute the given file upon receiving a connection')
