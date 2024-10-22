@@ -15,7 +15,7 @@
 - **Modo Servidor**: o socketCat.py aceita conexões dos clientes e a execução de comandos.
 - **Upload de Arquivos**: Recebimento e armazenamento de arquivos enviados pelos clientes.
 - **Shell de Comando**: Uma shell interativa para comunicação com o servidor.
----
+
 
 ## Instalação
 
