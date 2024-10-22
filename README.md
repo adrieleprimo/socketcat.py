@@ -67,7 +67,6 @@ sudo python3 ./src/socketCat.py -t [targetHost] -p [port]
 ```
 
 Para mais opções e ajuda com a ferramenta:
-```bash
 ```bash 
 sudo python3 socketCat.py -h
 ```
