@@ -6,14 +6,12 @@
 
  ![Python](https://img.shields.io/badge/python-3.9-blue)  ![License](https://img.shields.io/badge/license-MIT-green) 
 
----
+
 
 ## Descrição
-
 **socketCat.py** é um singelo projeto construído a partir dos estudos em conjunto com a galera do **Axé Sec**. O pilar deste projeto é compreender o funcionamento dos módulos do Python e como ocorre as conexões entre redes, atuando como cliente ou servidor, com conexões TCP. Além disso, possui outras funcionalidades, como execução remota de comandos, uploado de arquivos, noções de SSL/TLS e uma shell embrionaria que futuramente será mais intuitiva.
 
-### Funcionalidades
----
+## Funcionalidades
 - **Modo Servidor**: o socketCat.py aceita conexões dos clientes e a execução de comandos.
 - **Upload de Arquivos**: Recebimento e armazenamento de arquivos enviados pelos clientes.
 - **Shell de Comando**: Uma shell interativa para comunicação com o servidor.
@@ -30,7 +28,6 @@
 
 
 ## Instalação
-
 1. Clone o repositório:
    ```bash
    git clone https://github.com/yourusername/socketCat.git
@@ -40,8 +37,7 @@
     pip install -r requirements.txt
 ```
 
-### Utilização
----
+## Utilização
 Para iniciar o servidor e escutar conexões:
 ```bash
 sudo python3 ./src/socketCat.py -l -p [port] -c
