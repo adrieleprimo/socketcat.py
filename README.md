@@ -29,13 +29,31 @@
 
 ## Instalação
 1. Clone o repositório:
-   ```bash
-   git clone https://github.com/yourusername/socketCat.git
-   cd socketCat
+```bash
+git clone https://github.com/yourusername/socketCat.git
+cd socketCat
+```
 2. Instalação das dependências necessárias:
 ```bash
     pip install -r requirements.txt
 ```
+
+## Configuração do SSL/TLS
+Para que você consiga utilizar esse projeto, será necessário gerar uma certificação com o seguinte comando:
+```bash
+openssl req -new -x509 -keyout key.pem -out cert.pem -days 365 -nodes
+```
+O comando utilizando o openssl é apenas para gerar uma chave privada e certificado válido, com duração de 1 ano. A ideia é apenas para testar conexões SSL/TSL, para assim entender, de maneira bem básica sobre protocolos de seguranças que são usados para criptografazer a comunicação entre clientes e servidores pela Internet.
+
+* O key.pem é o arquivo da sua chave privada gerada. O nome pode ser trocado
+* o cert.pem é o certificado. O nome pode ser trocado.
+
+Após isso, em **context**, localizado na função **serverLoop** deverá atualizar com o diretório onde foi gerada a certificação e a chave privada:
+```python
+context.load_cert_chain(certfile='./DIRETORIO-DA-SUA-CERTIFICAÇAO', keyfile='./DIRETORIO-DA-SUA-CHAVE-PRIVADA')
+```
+* O key.pem é o arquivo da sua chave privada gerada.
+* o cert.pem é o certificado.
 
 ## Utilização
 Para iniciar o servidor e escutar conexões:
