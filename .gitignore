@@ -26,3 +26,6 @@ Thumbs.db
 *.egg
 dist/
 build/
+
+cert.pem
+key.pem
