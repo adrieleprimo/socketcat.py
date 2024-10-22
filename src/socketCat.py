@@ -70,11 +70,14 @@ def serverLoop():
     server.bind((target, port))
     server.listen(5)
 
+    context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    context.load_cert_chain(certfile='cert.pem', keyfile='key.pem')
+
     print(f'[*] Listening on {target}:{port}')
 
     while True:
         clientSocket, addr = server.accept()
-
+        clientSocket = context.wrap_socket(clientSocket, server_side=True)
         clientThread = threading.Thread(target=clientHandler, args=(clientSocket,))
         clientThread.start()
 
