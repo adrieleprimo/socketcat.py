@@ -17,7 +17,7 @@
 - **Shell de Comando**: Uma shell interativa para comunicação com o servidor.
 
 
-## Tecnologias Usadas
+## Tecnologias 
 - ![Python](https://img.shields.io/badge/Python-3.9-blue?logo=python&logoColor=white)
 - ![Socket](https://img.shields.io/badge/Socket%20Programming-using%20Python-green)
 - ![SSL](https://img.shields.io/badge/SSL-using%20Python-purple)
@@ -43,7 +43,7 @@ Para que você consiga utilizar esse projeto, será necessário gerar uma certif
 ```bash
 openssl req -new -x509 -keyout key.pem -out cert.pem -days 365 -nodes
 ```
-O comando utilizando o openssl é apenas para gerar uma chave privada e certificado válido, com duração de 1 ano. A ideia é apenas para testar conexões SSL/TSL, para assim entender, de maneira bem básica sobre protocolos de seguranças que são usados para criptografazer a comunicação entre clientes e servidores pela Internet.
+O comando utilizando o openssl é apenas para gerar uma chave privada e certificado válido, com duração de 1 ano. A ideia é apenas para testar conexões SSL/TSL, para assim entender de maneira bem básica sobre protocolos de seguranças que são usados para criptografar a comunicação entre clientes e servidores pela Internet.
 
 * O key.pem é o arquivo da sua chave privada gerada. O nome pode ser trocado
 * o cert.pem é o certificado. O nome pode ser trocado.
@@ -58,12 +58,12 @@ context.load_cert_chain(certfile='./DIRETORIO-DA-SUA-CERTIFICAÇAO', keyfile='./
 ## Utilização
 Para iniciar o servidor e escutar conexões:
 ```bash
-sudo python3 ./src/socketCat.py -l -p [port] -c
+sudo python3 socketCat.py -l -p [port] -c
 ```
 
 Para conectar-se ao servidor:
 ```bash
-sudo python3 ./src/socketCat.py -t [targetHost] -p [port]
+sudo python3 socketCat.py -t [targetHost] -p [port]
 ```
 
 Para mais opções e ajuda com a ferramenta:
