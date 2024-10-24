@@ -25,7 +25,7 @@ def usage():
     print('socketCat.py -t 192.168.0.1 -p 5555 -l -c')
     print('socketCat.py -t 192.168.0.1 -p 5555 -l -u=c:\\target.exe')
     print('socketCat.py -t 192.168.0.1 -p 5555 -l -e="cat /etc/passwd"')
-    print('echo "ABCDEFGHI" | ./socketCat.py 192.168.11.12 -p 135')
+    print('echo "ABCDEFGHI" | socketCat.py 192.168.11.12 -p 135')
     sys.exit(0)
 
 def clientSender(buffer):
