@@ -6,7 +6,7 @@ O formato será baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1
 
 ---
 
-## [v1.0.0] - 2024-09-19
+## [v1.0.0] - 2024-10-19
 ### Adicionado
 - Primeira versão do projeto `sokcetCat.py`, com as funcionalidades básicas cliente-servidor TCP.
 - Funções iniciais:
