@@ -15,3 +15,9 @@ def logConnection(clientAddress, port, direction='inbound'):
 
 def logCommandExecution(command):
     logging.info(f'Command executed {command}')  
+
+def logFileUpload(destination, status):
+    if status:
+        logging.info(f'File upload successfully saved in {destination}')
+    else:
+        logging.error(f'Failed to save the file: {destination}')
