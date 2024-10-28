@@ -24,3 +24,9 @@ def logFileUpload(destination, status):
 
 def logMessageSent(message):
     logging.debug(f'Message sent: {message}')
+
+def logMessageReceived(message):
+    logging.debug(f'Message received: {message}')
+
+def logError(errorMessage):
+    logging.error(f'Error: {errorMessage}')
