@@ -21,3 +21,6 @@ def logFileUpload(destination, status):
         logging.info(f'File upload successfully saved in {destination}')
     else:
         logging.error(f'Failed to save the file: {destination}')
+
+def logMessageSent(message):
+    logging.debug(f'Message sent: {message}')
