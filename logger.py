@@ -13,4 +13,5 @@ def logConnection(clientAddress, port, direction='inbound'):
     else:
         logging.info(f'Connection established to {clientAddress}:{port}')
 
-    
+def logCommandExecution(command):
+    logging.info(f'Command executed {command}')  
