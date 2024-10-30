@@ -108,7 +108,7 @@ def clientHandler(clientSocket):
     global command
 
     clientAddress = clientSocket.getpeername()
-    logger.logConnection(clientAddress[0], clientAddress[[1]])
+    logger.logConnection(clientAddress[0], clientAddress[1])
 
     if len(uploadDestination):
         fileBuffer = b''
