@@ -4,6 +4,7 @@ import getopt
 import threading
 import subprocess
 import ssl
+import logger
 
 listen = False
 command = False
@@ -31,11 +32,13 @@ def usage():
 def clientSender(buffer):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client = ssl.wrap_socket(client, ssl_version=ssl.PROTOCOL_TLSv1_2)
+    logger.logConnection(target, port, 'outbound')
 
     try:
         client.connect((target,port))
         if len(buffer):
             client.send(buffer.encode())
+            logger.logMessageSent(buffer)
 
         while True:
             recvLen = 1
@@ -49,13 +52,16 @@ def clientSender(buffer):
                 if recvLen < 4096:
                     break
             print('[*] Received response: ')
+            logger.logMessageReceived(response.decode())
             print(response)
             
             buffer = input('')
             buffer+='\n'
 
             client.send(buffer.encode())
-    except:
+            logger.logMessageSent(buffer)
+    except Exception as e:
+        logger.logError(f'Exception when connecting: {str(e)}')
         print('[*] Exception! Exiting.')
 
         client.close()
@@ -69,6 +75,7 @@ def serverLoop():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((target, port))
     server.listen(5)
+    logger.logConnection(target, port, 'serverListening')
 
     context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     context.load_cert_chain(certfile='./cert.pem', keyfile='./key.pem')
@@ -77,17 +84,20 @@ def serverLoop():
 
     while True:
         clientSocket, addr = server.accept()
+        logger.logConnection(addr[0], addr[0], 'inbound')
         clientSocket = context.wrap_socket(clientSocket, server_side=True)
         clientThread = threading.Thread(target=clientHandler, args=(clientSocket,))
         clientThread.start()
 
 def runCommand(command):
     command = command.rstrip()
+    logger.logCommandExecution(command)
     print(f"[*] Running command: {command}")
 
     try:
         output = subprocess.check_output(command,stderr=subprocess.STDOUT, shell=True)
-    except:
+    except subprocess.CalledProcessError as e:
+        logger.logError(f'Error executing command')
         output = f'Failed to execute command.\r\n'
     return output
 
@@ -97,11 +107,13 @@ def clientHandler(clientSocket):
     global execute
     global command
 
+    clientAddress = clientSocket.getpeername()
+    logger.logConnection(clientAddress[0], clientAddress[[1]])
 
     if len(uploadDestination):
         fileBuffer = b''
-        print(f'[*] Upload destination set to {uploadDestination}')
-
+        logger.logFileUpload(uploadDestination, True)
+        print(f'[*] Upload destination set to {uploadDestination}')   
         while True:
             data = clientSocket.recv(1024)
 
@@ -116,17 +128,20 @@ def clientHandler(clientSocket):
             fileDescriptor.close()
 
             clientSocket.send(f'Successfully saved file to {uploadDestination}\r\n')
+            logger.logFileUpload(uploadDestination, True)
         except:
             clientSocket.send(f'Failed to save file to {uploadDestination}\r\n')
+            logger.logFileUpload(uploadDestination, False)
     
     if len(execute):
+        logger.logCommandExecution(execute)
         print(f'[*] Executing command: {execute}')
         output = runCommand(execute)
         clientSocket.send(output)
     
     if command:
+        logger.logCommandExecution('Shell Command Started')
         print(f'[*] Command shell requested')
-
         while True:
             clientSocket.send(b'socketCat:#> ')
             cmdBuffer = b''
@@ -134,13 +149,16 @@ def clientHandler(clientSocket):
                 cmdBuffer += clientSocket.recv(1024)
             response = runCommand(cmdBuffer.decode().strip())
             clientSocket.send(response)
+            logger.logMessageSent(response.decode())
 
     while True:
         request = clientSocket.recv(1024).decode()
         if not request:
             break
+        logger.logMessageReceived(request)
         print(f'[*] Received: {request}')
         clientSocket.send(f'Server received: {request}\n'.encode())
+        
 
 def main():
     global listen
@@ -157,6 +175,7 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:], 'hle:t:p:cu:',
         ['help', 'listen', 'execute', 'target', 'port', 'command', 'upload'])
     except getopt.GetoptError as err:
+        logger.logError(f'Option Error: {str(err)}')
         print(str(err))
         usage()
     
