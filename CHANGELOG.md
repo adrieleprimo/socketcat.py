@@ -7,7 +7,7 @@ O formato será baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1
 ## [1.2.0] - 2024-10-30
 ### Adicionado
 - A implementação de logs para conexões estabelecidas e recebidas, com a diferenciação de entrada e saída.
-- Registro da execução de comandos, para melhor monitoramente das atividades remotas.
+- Registro da execução de comandos, para melhor monitoramento das atividades remotas.
 - Log para upload de arquivos, além de verificação caso ocorra com sucesso ou erro ao salvar o arquivo.
 - Registro das mensagens enviadas e recebidas, com nível `DEBUG`, ou seja, desde eventos de nível `DEBUG`e superiores, como `INFO`, `ẀARNING`, `ERROR` e `CRITICAL`.
 - Registro de erros, para obter informações mais precisas e específicas sobre o tipo de erro e respectivamente a sua origem.
@@ -16,7 +16,7 @@ O formato será baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1
 - Configurações de logs para que inicialmente sejam definidos a nível `DEBUG` e grave os logs em arquivos diadiários com nome `socketCat_YYYYMMDD.log`. Logo, com o nome do projeto e  respectivamente ano, mês e data.
 
 ### Melhorias
-- IMplementação dos controles de níveis de log ('INFO`, `DEBUG`, `ERROR`, etc) para deixar mais organizado e facilitar quanto a análise das atividades conforme a severidade expressa no log.
+- Implementação dos controles de níveis de log ('INFO`, `DEBUG`, `ERROR`, etc) para deixar mais organizado e facilitar quanto a análise das atividades conforme a severidade expressa.
 
 ## [1.1.0] - 2024-10-22
 ### Adicionado 
