@@ -14,3 +14,9 @@ class aesCipher:
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
         encryptedData = cipher.encrypt(pad(data.encode(), AES.block_size))
         return base64.b64encode(iv + encryptedData).decode()
+    
+    def decrypt(self, encryptedData):
+        rawData = base64.b64decode(encryptedData)
+        iv = rawData[:16]
+        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        return unpad(cipher.decrypt(encryptedData), AES.block_size).decode()
