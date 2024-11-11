@@ -6,7 +6,7 @@ import subprocess
 import ssl
 import utils.logger as logger
 import bcrypt
-
+import getpass
 
 listen = False
 command = False
@@ -31,22 +31,31 @@ def usage():
     print('echo "ABCDEFGHI" | socketCat.py 192.168.11.12 -p 135')
     sys.exit(0)
 
+def setPassword():
+    password = getpass.getpass('Enter a new password to configure: ')
+    hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    with open('passwordHash.txt', 'wb') as f:
+        f.write(hashed)
+    print('Password successfully configured!')
+
+
+
 def checkPassword():
     try:
         with open('passwordHash.txt', 'rb') as f:
             storedHash = f.read()
     except FileNotFoundError:
-        print('Password hash not found!')
-        return False
-    
-    password = input('Enter your password:  ')
-
-    if bcrypt.checkpw(password.encode(), storedHash):
-        print('Successful Authentication!')
+        print("Password hash not found! Let's set a new password")
+        setPassword()
         return True
     
-    print('Incorrect password. Access Denied')
-    return False
+    password = getpass.getpass('Enter your password:  ')
+    if bcrypt.checkpw(password.encode(), storedHash):
+        print('Successful Authentication!.')
+        return True
+    else:
+        print('Incorrect password. Access Denied')
+        return False
 
 
 def clientSender(buffer):
@@ -217,6 +226,9 @@ def main():
         else:
             assert False, 'Unhandled Option'
 
+    if not checkPassword():
+        print('Authentication failed. Closing.')
+        sys.exit(1)
     if not listen and len(target) and port > 0:
         buffer = sys.stdin.read()
         clientSender(buffer)
