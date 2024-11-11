@@ -32,3 +32,4 @@ key.pem
 
 *.json
 
+passwordHash.*

@@ -4,7 +4,7 @@ import getopt
 import threading
 import subprocess
 import ssl
-import logger
+import utils.logger as logger
 
 listen = False
 command = False
