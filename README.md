@@ -1,7 +1,7 @@
 # socketCat.py
 
 <p align="center">
-  <img align="center" width="280" src="./socketcat.gif" alt="socketCat Logo"/>
+  <img align="center" width="280" src="./icon/socketcat.gif" alt="socketCat Logo"/>
 </p>
 
  ![Python](https://img.shields.io/badge/python-3.9-blue)  ![License](https://img.shields.io/badge/license-MIT-green) 
