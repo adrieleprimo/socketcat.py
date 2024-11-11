@@ -4,6 +4,20 @@ Este arquivo tem o propósito de documentar as mudanças que serão realizadas n
 
 O formato será baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [1.3.0] - 2024-11-11
+### Adicionado
+* Implementação de uma autenticação simples com senha para ter acesso ao `socketCat.py`.
+* Gerador automático de arquivo txt com senha, caso ao ser verificado que o mesmo não possui o `passwordHash.txt` será realizada uma nova senha.
+* Utilização da biblioteca `bcrypt` para criar e checar a senha através da hash segura que é gerada.
+* Utilização do getpass para ocultar as informações de entrada de senha do usuário.
+
+### Modificado
+* Alteração no processo de verificação e configuração de senha, tendo apenas acesso com senha válida.
+
+### Melhorias
+* Autenticação com senha antes de realizar qualquer função como cliente ou servidor.
+* Mensagens com sinalizações em processo de registro ou tentativa de acesso, principalmente em caso de senha incorreta.
+
 ## [1.2.0] - 2024-10-30
 ### Adicionado
 - A implementação de logs para conexões estabelecidas e recebidas, com a diferenciação de entrada e saída.
@@ -12,7 +26,7 @@ O formato será baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1
 - Registro das mensagens enviadas e recebidas, com nível `DEBUG`, ou seja, desde eventos de nível `DEBUG`e superiores, como `INFO`, `ẀARNING`, `ERROR` e `CRITICAL`.
 - Registro de erros, para obter informações mais precisas e específicas sobre o tipo de erro e respectivamente a sua origem.
 
-### Alterado
+### Modificado
 - Configurações de logs para que inicialmente sejam definidos a nível `DEBUG` e grave os logs em arquivos diadiários com nome `socketCat_YYYYMMDD.log`. Logo, com o nome do projeto e  respectivamente ano, mês e data.
 
 ### Melhorias
