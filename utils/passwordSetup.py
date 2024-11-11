@@ -6,5 +6,3 @@ def setPassword(password):
         f.write(hashed)
     print('Password successfully configured!')
 
-password = input('Password: ')
-setPassword(password)
