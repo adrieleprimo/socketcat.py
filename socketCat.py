@@ -5,6 +5,8 @@ import threading
 import subprocess
 import ssl
 import utils.logger as logger
+import bcrypt
+
 
 listen = False
 command = False
@@ -28,6 +30,24 @@ def usage():
     print('socketCat.py -t 192.168.0.1 -p 5555 -l -e="cat /etc/passwd"')
     print('echo "ABCDEFGHI" | socketCat.py 192.168.11.12 -p 135')
     sys.exit(0)
+
+def checkPassword():
+    try:
+        with open('passwordHash.txt', 'rb') as f:
+            storedHash = f.read()
+    except FileNotFoundError:
+        print('Password hash not found!')
+        return False
+    
+    password = input('Enter your password:  ')
+
+    if bcrypt.checkpw(password.encode(), storedHash):
+        print('Successful Authentication!')
+        return True
+    
+    print('Incorrect password. Access Denied')
+    return False
+
 
 def clientSender(buffer):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
