@@ -29,3 +29,6 @@ build/
 
 cert.pem
 key.pem
+
+*.json
+
