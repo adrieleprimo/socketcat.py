@@ -25,6 +25,11 @@
 - ![Getopt](https://img.shields.io/badge/Getopt-using%20Python-yellow)
 - ![Subprocess](https://img.shields.io/badge/Subprocess-using%20Python-red)
 - ![Sys](https://img.shields.io/badge/Sys-using%20Python-lightgrey)
+- ![Bcrypt](https://img.shields.io/badge/Bcrypt-using_Python-blue)
+- ![Getpass](https://img.shields.io/badge/Getpass-using_Python-white)
+- ![Logging](https://img.shields.io/badge/Logging-using_Python-black)
+
+
 
 
 ## Instalação
